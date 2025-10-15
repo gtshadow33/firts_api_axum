@@ -52,6 +52,9 @@ async fn crear_usuario(
     State(state): State<AppState>,
     Json(usuario): Json<Usuario>,
 ) -> impl IntoResponse {
+    if usuario.nombre.is_empty() || usuario.edad == 0 {
+        return (StatusCode::BAD_REQUEST, Json("Nombre y edad son obligatorios")).into_response();
+    }
     let mut usuarios = state.usuarios.lock().unwrap();
     
     // Verificar si el usuario ya existe
