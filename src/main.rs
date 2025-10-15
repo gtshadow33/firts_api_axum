@@ -52,7 +52,7 @@ async fn crear_usuario(
     State(state): State<AppState>,
     Json(usuario): Json<Usuario>,
 ) -> impl IntoResponse {
-    if usuario.nombre.is_empty() || usuario.edad == 0 {
+    if usuario.nombre.is_empty() || usuario.edad ==  0 {
         return (StatusCode::BAD_REQUEST, Json("Nombre y edad son obligatorios")).into_response();
     }
     let mut usuarios = state.usuarios.lock().unwrap();
@@ -77,12 +77,18 @@ async fn actualizar_usuario(
     // Asegurar que el ID del path coincida con el ID del cuerpo
     datos.id = id;
     
-    match usuarios.get_mut(&id) {
+    /*match usuarios.get_mut(&id) {
         Some(usuario) => {
             *usuario = datos.clone();
             (StatusCode::OK, Json(datos)).into_response()
         }
         None => (StatusCode::NOT_FOUND, Json("Usuario no encontrado")).into_response(),
+    }*/
+    if let Some(usuario)= usuarios.get_mut(&id) {
+        *usuario = datos.clone();
+        (StatusCode::OK, Json(datos)).into_response()
+    } else {
+        (StatusCode::NOT_FOUND, Json("Usuario no encontrado")).into_response()
     }
 }
 
