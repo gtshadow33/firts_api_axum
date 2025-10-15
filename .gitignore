@@ -1,1 +1,49 @@
-/target
+# Rust build
+/target/
+**/*.rs.bk
+
+# Cargo
+/Cargo.lock
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs y archivos temporales
+*.log
+*.tmp
+
+# Node (si en algún momento tienes frontend)
+node_modules/
+dist/
+
+# Archivos de configuración locales
+.env
+.env.local
+.env.*.local
+
+# Ejecutables
+*.exe
+*.dll
+*.so
+*.dylib
+*.out
+
+# JetBrains
+*.iml
+
+# MacOS
+.AppleDouble
+.LSOverride
+
+# VS Code
+.vscode/
+.history/
